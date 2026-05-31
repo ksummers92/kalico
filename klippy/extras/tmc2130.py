@@ -382,7 +382,7 @@ class MCU_TMC_SPI:
         with self.mutex:
             for retry in range(5):
                 v = self.tmc_spi.reg_write(reg, val, self.chain_pos, print_time)
-                if v == val:
+                if v == val or v == 0xffffffff:
                     return
         raise self.printer.command_error(
             "Unable to write tmc spi '%s' register %s" % (self.name, reg_name)
