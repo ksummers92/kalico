@@ -468,6 +468,41 @@
   
   
   
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Bleeding Edge
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Bleeding Edge
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="Bleeding_Edge.html" class="md-nav__link">
         
@@ -499,6 +534,35 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Nonlinear_Pressure_Advance.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nonlinear Pressure Advance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -631,6 +695,15 @@
   
     <nav class="md-nav" aria-label="Position Examples">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additional-g-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional G-codes
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#homing" class="md-nav__link">
@@ -2088,9 +2161,50 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Load_Cell.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Load Cells
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Telemetry.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Kalico Telemetry
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -2194,6 +2308,15 @@
   
     <nav class="md-nav" aria-label="Position Examples">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additional-g-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional G-codes
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#homing" class="md-nav__link">
@@ -2623,6 +2746,28 @@ detach_position: 50, 150
 z_hop: 15
 </code></pre></div>
 
+<h3 id="additional-g-codes">Additional G-codes<a class="headerlink" href="#additional-g-codes" title="Permanent link">&para;</a></h3>
+<p>If your probe has special setup/teardown steps (e.g., moving a servo), you can use the following configuration options to execute custom G-code before or after attaching/detaching the probe instead of overwriting <a href="#individual-movements">individual movements</a> commands:</p>
+<ul>
+<li><code>pre_attach_gcode:</code><br>
+  <em>Default Value: None</em><br>
+  G-code to execute immediately before the probe is attached.</li>
+</ul>
+<ul>
+<li><code>post_attach_gcode:</code><br>
+  <em>Default Value: None</em><br>
+  G-code to execute immediately after the probe is attached.</li>
+</ul>
+<ul>
+<li><code>pre_detach_gcode:</code><br>
+  <em>Default Value: None</em><br>
+  G-code to execute immediately before the probe is detached.</li>
+</ul>
+<ul>
+<li><code>post_detach_gcode:</code><br>
+  <em>Default Value: None</em><br>
+  G-code to execute immediately after the probe is detached.</li>
+</ul>
 <h3 id="homing">Homing<a class="headerlink" href="#homing" title="Permanent link">&para;</a></h3>
 <p>No configuration specific to the dockable probe is required. However, when
 using the probe as a virtual endstop, it's required to
@@ -2668,6 +2813,12 @@ move  to the dock and return back to home_xy_position.</li>
 <div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">safe_z_home</span><span class="p">]</span>
 <span class="ss">home_xy_position</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span>
 <span class="ss">z_hop</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+</code></pre></div>
+
+<p>When using <code>safe_z_home</code>, the probe can be made to detach automatically when Z 
+is homed.</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">dockable_probe</span><span class="p">]</span>
+<span class="ss">detach_dockable_before_z_home</span><span class="p">:</span><span class="w"> </span><span class="nc">True</span>
 </code></pre></div>
 
 <h3 id="probe-attachment-verification">Probe Attachment Verification<a class="headerlink" href="#probe-attachment-verification" title="Permanent link">&para;</a></h3>
@@ -2786,7 +2937,7 @@ and <code>MOVE_TO_DETACH_PROBE</code>.</p>
 <p>These commands are useful during setup to prevent the full attach/detach
 sequence from crashing into the bed or damaging the probe/dock.</p>
 <p>If your probe has special setup/teardown steps (e.g. moving a servo),
-accommodating that could be accomplished by overriding these gcodes.</p>
+accommodating that could be accomplished by using <a href="#additional-g-codes">additional G_codes</a> in configuration or overriding the following gcodes.</p>
 <p><code>MOVE_TO_APPROACH_PROBE</code></p>
 <p>This command will move the toolhead to the <code>approach_position</code>. It can be
 overridden to move a servo if that's required for attaching your probe.</p>
@@ -2838,6 +2989,9 @@ SET_DOCKABLE_PROBE AUTO_ATTACH_DETACH=1  # Make sure the probe is attached in fu
 <li>The toolhead position is compared to the dock position.</li>
 </ul>
 <ul>
+<li>The pre_attach_gcode is executed</li>
+</ul>
+<ul>
 <li>If the toolhead is outside of the minimum safe radius, the toolhead is
       commanded to move to the approach vector, that is, a position that is
       the minimum safe distance from the dock in line with the dock angle.
@@ -2850,12 +3004,15 @@ SET_DOCKABLE_PROBE AUTO_ATTACH_DETACH=1  # Make sure the probe is attached in fu
 </ul>
 <ul>
 <li>The tool is moved along the approach vector to the dock coordinates.
-    (MOVE_TO_DOCK_PROBE)</li>
+      (MOVE_TO_DOCK_PROBE)</li>
 </ul>
 <ul>
 <li>The toolhead is commanded to move out of the dock back to the minimum
       safe distance in the reverse direction along the dock angle.
       (MOVE_TO_EXTRACT_PROBE)</li>
+</ul>
+<ul>
+<li>The post_attach_gcode is executed</li>
 </ul>
 <ul>
 <li>If configured, the probe is checked to see if it is attached.</li>
@@ -2880,6 +3037,9 @@ SET_DOCKABLE_PROBE AUTO_ATTACH_DETACH=1  # Make sure the probe is attached in fu
 <li>The toolhead position is compared to the dock position.</li>
 </ul>
 <ul>
+<li>The pre_detach_gcode is executed</li>
+</ul>
+<ul>
 <li>If the toolhead is outside of the minimum safe radius, the toolhead is
       commanded to move to the approach vector, that is, a position that is
       the minimum safe distance from the dock in line with the dock angle.
@@ -2897,6 +3057,9 @@ SET_DOCKABLE_PROBE AUTO_ATTACH_DETACH=1  # Make sure the probe is attached in fu
 <ul>
 <li>The toolhead is commanded to move along the detach vector if supplied or a
       calculated direction based on axis parameters. (MOVE_TO_DETACH_PROBE)</li>
+</ul>
+<ul>
+<li>The post_detach_gcode is executed</li>
 </ul>
 <ul>
 <li>If configured, the probe is checked to see if it detached.</li>
